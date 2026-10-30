@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6c4cf1">
+<meta name="description" content="عبقري صغير: ألعاب تعليمية ممتعة لتنمية الذاكرة والتركيز والعد والتفكير للأطفال.">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>عبقري صغير</title>
+<style>
+:root{--purple:#6c4cf1;--ink:#28234a;--bg:#f5f3ff;--yellow:#ffd95a;--mint:#b9f4df;--muted:#716b91}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#eee9ff,#fff9e7);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink);min-height:100vh;min-height:100dvh}
+button{font:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #28234a;outline-offset:3px}
+.app{max-width:600px;margin:auto;padding: max(16px,env(safe-area-inset-top)) 16px max(26px,env(safe-area-inset-bottom))}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{font-weight:900;font-size:clamp(22px,5vw,28px)}.subtitle{color:var(--muted);font-size:13px;margin-top:4px}.mascot{font-size:42px;background:#fff;border-radius:18px;padding:7px 12px;box-shadow:0 5px 0 #ded7ff}
+.hero{margin-top:18px;background:var(--purple);color:white;border-radius:26px;padding:20px;box-shadow:0 7px 0 #4c32bd}.hero h1{font-size:25px;margin:0 0 8px}.hero p{margin:0;line-height:1.8}
+.stats{display:flex;gap:8px;margin:14px 0}.stat{flex:1;text-align:center;background:#fff;border-radius:16px;padding:10px 5px;font-weight:800;font-size:13px}.stat b{display:block;font-size:22px;color:var(--purple);margin-top:3px}
+.section-title{font-weight:900;font-size:19px;margin:20px 2px 10px}.modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.mode{min-height:120px;border:0;border-radius:20px;padding:15px 12px;text-align:right;background:white;box-shadow:0 4px 0 #e5e0fa;color:var(--ink);cursor:pointer}.mode:active,.btn:active,.choice:active,.card:active{transform:translateY(2px)}.mode span{display:block;font-size:30px;margin-bottom:6px}.mode strong{font-size:16px}.mode small{display:block;color:#6c6887;margin-top:4px;line-height:1.5}
+.panel{background:white;border-radius:24px;padding:16px;margin-top:16px;box-shadow:0 5px 0 #e6e0fa}.panelhead{display:flex;align-items:center;justify-content:space-between;gap:8px}.panel h2{font-size:20px;margin:0}.btn{border:0;background:var(--yellow);color:#493900;border-radius:14px;padding:12px 16px;font-weight:900;font-size:16px;cursor:pointer;min-height:44px}.btn.secondary{background:#eeeaff;color:#4d39b5}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:16px}.card{aspect-ratio:1/1;border:0;border-radius:15px;background:#eae5ff;box-shadow:inset 0 -4px 0 #d5ccff;font-size:clamp(23px,7vw,34px);cursor:pointer;color:var(--ink);font-weight:900;min-width:0}.card.open,.card.matched{background:#d7ffed;box-shadow:inset 0 -4px 0 #a7e9cf}.message{font-weight:800;line-height:1.7;min-height:28px;margin-top:12px}.focus-target{font-size:76px;text-align:center;padding:15px}.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.choice{font-size:clamp(28px,8vw,38px);padding:14px 4px;background:#f0ecff;border:0;border-radius:16px;cursor:pointer;min-height:68px}.choice:disabled{opacity:.75}.footer{text-align:center;color:#777194;font-size:12px;margin:20px 0 0;line-height:1.8}.hidden{display:none!important}.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}.progress{height:8px;border-radius:9px;background:#eeeaff;overflow:hidden;margin-top:10px}.progress>div{height:100%;background:#b9f4df;width:0;transition:width .2s}
+@media(min-width:520px){.mode{min-height:130px}.app{padding-left:22px;padding-right:22px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="top"><div><div class="brand">🧠 عبقري صغير</div><div class="subtitle">نتعلّم ونلعب كل يوم!</div></div><div class="mascot" role="img" aria-label="بومة كرتونية">🦉</div></header>
+  <section class="hero"><h1>أهلًا يا بطل! ⭐</h1><p>جاهز لتحدّي الذكاء؟ اختار لعبة، ركّز كويس، واجمع النجوم. كل محاولة فرصة إنك تتعلّم حاجة جديدة!</p></section>
+  <div class="stats" aria-label="نتائجك"><div class="stat">⭐ النجوم<b id="stars">0</b></div><div class="stat">🎯 المستوى<b id="level">1</b></div><div class="stat">🏆 أحسن نتيجة<b id="best">0</b></div></div>
+  <div class="section-title">اختار مغامرتك</div>
+  <div class="modes">
+    <button class="mode" data-game="memory"><span>🃏</span><strong>ذاكرة الأبطال</strong><small>طابق الصور المتشابهة</small></button>
+    <button class="mode" data-game="focus"><span>👀</span><strong>عين الصقر</strong><small>اختار الصورة المطلوبة</small></button>
+    <button class="mode" data-game="count"><span>🍎</span><strong>عدّ بذكاء</strong><small>درّب مخّك على الأرقام</small></button>
+    <button class="mode" data-game="pattern"><span>🧩</span><strong>كمّل النمط</strong><small>فكّر واكتشف اللي جاي</small></button>
+  </div>
+  <section id="game" class="panel hidden" aria-label="اللعبة الحالية"><div class="panelhead"><h2 id="gameTitle">اللعبة</h2><button class="btn secondary" id="backBtn">رجوع</button></div><div id="gameBody"></div><div id="message" class="message" aria-live="polite"></div></section>
+  <div class="footer">اللعبة للتعلّم والمرح، مش اختبار. خُد استراحة قصيرة لو تعبت 😊<br>تُحفظ النجوم على نفس الجهاز.</div>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+let stats={stars:0,best:0}, first=null,lock=false,matches=0,mode='memory',round=0,answered=false;
+try{const saved=JSON.parse(localStorage.getItem('abqariStats')||'{}');stats.stars=Number(saved.stars)||0;stats.best=Number(saved.best)||0}catch(e){}
+function update(){ $('stars').textContent=stats.stars;$('level').textContent=Math.floor(stats.stars/5)+1;$('best').textContent=stats.best;try{localStorage.setItem('abqariStats',JSON.stringify(stats))}catch(e){} }
+function reward(n=1){stats.stars+=n;stats.best=Math.max(stats.best,stats.stars);update()}
+function showGame(m){mode=m;$('game').classList.remove('hidden');$('message').textContent='';if(m==='memory')memory();else if(m==='focus')focus();else if(m==='count')count();else pattern();$('game').scrollIntoView({behavior:'smooth',block:'start'})}
+function home(){$('game').classList.add('hidden')}
+$('backBtn').addEventListener('click',home);
+document.querySelectorAll('.mode[data-game]').forEach(button=>button.addEventListener('click',()=>showGame(button.dataset.game)));
+function memory(){
+ $('gameTitle').textContent='🃏 ذاكرة الأبطال';
+ $('gameBody').innerHTML='<p>اقلب بطاقتين كل مرة، وحاول تلاقي الصور المتطابقة.</p><div class="grid" id="cards"></div><div class="actions"><button class="btn" id="newMemory">لعبة جديدة 🔄</button></div>';
+ $('newMemory').onclick=memory;
+ const icons=['🐱','🐶','🐸','🦊','🐼','🦁','🐵','🐰'];const deck=[...icons.slice(0,6),...icons.slice(0,6)].sort(()=>Math.random()-.5);
+ first=null;lock=false;matches=0;round++;
+ deck.forEach(icon=>{const b=document.createElement('button');b.className='card';b.textContent='؟';b.setAttribute('aria-label','بطاقة مخفية');b.dataset.icon=icon;b.onclick=()=>flip(b);$('cards').appendChild(b)});
+ $('message').textContent='خد وقتك وركّز يا بطل!';
+}
+function flip(b){
+ if(lock||b.classList.contains('open')||b.classList.contains('matched'))return;
+ b.classList.add('open');b.textContent=b.dataset.icon;b.setAttribute('aria-label','صورة '+b.dataset.icon);
+ if(!first){first=b;return}
+ const prev=first;first=null;
+ if(prev.dataset.icon===b.dataset.icon){prev.classList.add('matched');b.classList.add('matched');prev.disabled=true;b.disabled=true;matches++;reward(1);$('message').textContent='برافو عليك! لقيت زوج متطابق ⭐';if(matches===6){reward(3);$('message').textContent='يا سلام! كسبت التحدّي! +٣ نجوم إضافية 🏆'} }
+ else{lock=true;$('message').textContent='مش نفس الصورة، جرّب تاني. إنت تقدر!';setTimeout(()=>{prev.classList.remove('open');b.classList.remove('open');prev.textContent='؟';b.textContent='؟';prev.setAttribute('aria-label','بطاقة مخفية');b.setAttribute('aria-label','بطاقة مخفية');lock=false},750)}
+}
+const animals=['🐶','🐱','🐸','🦊','🐼','🐵','🦁','🐰','🐢'];
+function focus(){
+ answered=false;const target=animals[Math.floor(Math.random()*animals.length)];
+ $('gameTitle').textContent='👀 عين الصقر';
+ $('gameBody').innerHTML='<p>دور على نفس الصورة بين الصور اللي تحت:</p><div class="focus-target" id="focusTarget"></div><div class="choices" id="choices"></div><div class="actions"><button class="btn secondary" id="newFocus">سؤال جديد ↻</button></div>';
+ $('focusTarget').textContent=target;const opts=[target];while(opts.length<3){const a=animals[Math.floor(Math.random()*animals.length)];if(!opts.includes(a))opts.push(a)}
+ opts.sort(()=>Math.random()-.5).forEach(a=>{const b=document.createElement('button');b.className='choice';b.textContent=a;b.setAttribute('aria-label','اختيار '+a);b.onclick=()=>{if(answered)return;if(a===target){answered=true;reward(1);$('message').textContent='صح! عينك قوية يا بطل! ⭐';document.querySelectorAll('#choices button').forEach(x=>x.disabled=true)}else $('message').textContent='قريب جدًا! بص للصورة المطلوبة وجرب تاني.'};$('choices').appendChild(b)});
+ $('newFocus').onclick=focus;$('message').textContent='ركّز في الصورة قبل ما تختار.';
+}
+function count(){
+ answered=false;const n=2+Math.floor(Math.random()*7),fruit=['🍎','🍌','🍓'][Math.floor(Math.random()*3)];
+ $('gameTitle').textContent='🍎 عدّ بذكاء';
+ $('gameBody').innerHTML='<p>عدّ الفواكه واختار الرقم الصح.</p><div id="fruits" style="font-size:35px;text-align:center;line-height:1.8;overflow-wrap:anywhere"></div><div class="choices" id="choices"></div><div class="actions"><button class="btn secondary" id="newCount">سؤال جديد ↻</button></div>';
+ $('fruits').textContent=Array(n).fill(fruit).join(' ');const opts=[n];while(opts.length<3){const a=1+Math.floor(Math.random()*9);if(!opts.includes(a))opts.push(a)}
+ opts.sort(()=>Math.random()-.5).forEach(a=>{const b=document.createElement('button');b.className='choice';b.textContent=a;b.onclick=()=>{if(answered)return;if(a===n){answered=true;reward(1);$('message').textContent='ممتاز! عددتهم صح ⭐';document.querySelectorAll('#choices button').forEach(x=>x.disabled=true)}else $('message').textContent='عدّ واحدة واحدة وجرب تاني.'};$('choices').appendChild(b)});
+ $('newCount').onclick=count;$('message').textContent='خليك هادي وعدّ واحدة واحدة.';
+}
+function pattern(){
+ answered=false;const patterns=[['🔴','🔵','🔴','🔵','🔴','🔵'],['⭐','🌙','⭐','🌙','⭐','🌙'],['🍎','🍌','🍌','🍎','🍌','🍌']];
+ const p=patterns[Math.floor(Math.random()*patterns.length)],answer=p[5];
+ $('gameTitle').textContent='🧩 كمّل النمط';
+ $('gameBody').innerHTML='<p>بص على الترتيب، واختار الرمز اللي يكمّله.</p><div id="sequence" style="font-size:34px;text-align:center;letter-spacing:4px;padding:15px;overflow-wrap:anywhere"></div><div class="choices" id="choices"></div><div class="actions"><button class="btn secondary" id="newPattern">لغز جديد ↻</button></div>';
+ $('sequence').textContent=p.slice(0,5).join(' ')+' ❓';
+ const wrong=answer==='🔵'?['🟢','🔴']:answer==='🌙'?['☀️','⭐']:['🍇','🍎'];
+ [answer,...wrong].sort(()=>Math.random()-.5).forEach(a=>{const b=document.createElement('button');b.className='choice';b.textContent=a;b.onclick=()=>{if(answered)return;if(a===answer){answered=true;reward(1);$('message').textContent='عاش! اكتشفت النمط الصح ⭐';document.querySelectorAll('#choices button').forEach(x=>x.disabled=true)}else $('message').textContent='بص للترتيب من الأول وحاول تاني.'};$('choices').appendChild(b)});
+ $('newPattern').onclick=pattern;$('message').textContent='فكّر: إيه اللي بيتكرر؟';
+}
+update();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script>
+</body></html>
